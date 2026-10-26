@@ -1,1 +1,17 @@
-
+{
+  "name": "sugbochat",
+  "version": "1.0.0",
+  "description": "Pseudonymous 1-on-1 real-time chat platform with Admin moderation.",
+  "main": "server/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-auth-library": "^9.14.0",
+    "sqlite3": "^5.1.7",
+    "ws": "^8.18.0"
+  }
+}
