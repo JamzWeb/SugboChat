@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SugboChat</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Identity Services SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <div id="app" class="app-container">
+
+    <!-- Screen 1: Sign-In / Landing -->
+    <section id="auth-screen" class="view active">
+      <div class="card landing-card">
+        <div class="brand">
+          <span class="logo-icon">🌴</span>
+          <h1>SugboChat</h1>
+        </div>
+        <p class="subtitle">Anonymous 1-on-1 Chat</p>
+        
+        <div class="features-list">
+          <div>🔒 Zero Chat Logs Stored</div>
+          <div>🎭 Pick Your Anonymous Nickname</div>
+          <div>⚡ Rapid Matchmaking</div>
+        </div>
+
+        <div id="google-btn-container" class="g-btn-wrapper"></div>
+        <p class="disclaimer">Sign in with Google to protect against bots. Your email is never shown to other users.</p>
+      </div>
+    </section>
+
+    <!-- Screen 2: Dashboard / Profile & Queue Setup -->
+    <section id="lobby-screen" class="view">
+      <div class="card lobby-card">
+        <header class="lobby-header">
+          <h2>Welcome to SugboChat</h2>
+          <span id="role-badge" class="badge">User</span>
+        </header>
+
+        <div class="form-group">
+          <label>Your Public Nickname</label>
+          <div class="input-with-button">
+            <input type="text" id="nickname-input" maxlength="20" placeholder="e.g. MangoShake_42">
+            <button id="save-nickname-btn" class="btn secondary">Save</button>
+          </div>
+          <small>Visible to matched peers. Real email is fully hidden.</small>
+        </div>
+
+        <!-- Admin Only Toggle -->
+        <div id="admin-toggle-wrapper" class="admin-controls hidden">
+          <label class="toggle-container">
+            <input type="checkbox" id="admin-mode-toggle">
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">👑 Queue with Admin Crown & Powers</span>
+          </label>
+          <button id="open-admin-panel-btn" class="btn outline">View Reports Dashboard</button>
+        </div>
+
+        <button id="start-search-btn" class="btn primary full-width">Start Matching</button>
+      </div>
+    </section>
+
+    <!-- Screen 3: Live Chat Room -->
+    <section id="chat-screen" class="view">
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <div class="partner-meta">
+          <span class="status-dot"></span>
+          <div class="partner-details">
+            <div id="partner-nickname" class="partner-name">Searching for someone...</div>
+            <div id="partner-role-tag" class="partner-badge hidden"></div>
+          </div>
+        </div>
+
+        <!-- In-Chat Admin Actions -->
+        <div id="in-chat-admin-bar" class="admin-actions-bar hidden">
+          <button id="btn-admin-warn" class="btn danger-outline btn-xs">⚠️ Warn</button>
+          <button id="btn-admin-kick" class="btn danger btn-xs">Kick</button>
+        </div>
+
+        <div class="chat-header-actions">
+          <button id="skip-btn" class="btn secondary btn-sm">Next</button>
+          <button id="report-btn" class="btn outline btn-sm">Report</button>
+        </div>
+      </header>
+
+      <!-- Message History Display -->
+      <main id="chat-window" class="chat-window">
+        <div id="system-banner" class="system-bubble">Finding a peer from Sugbo...</div>
+      </main>
+
+      <div id="typing-indicator" class="typing-indicator hidden">Stranger is typing...</div>
+
+      <!-- Message Input Bar -->
+      <footer class="chat-input-bar">
+        <input type="text" id="chat-input" placeholder="Type a message..." maxlength="500" disabled>
+        <button id="send-msg-btn" class="btn primary" disabled>Send</button>
+      </footer>
+    </section>
+
+    <!-- Modal: Admin Moderation Panel -->
+    <div id="admin-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Admin Moderation Panel</h3>
+          <button id="close-admin-modal-btn" class="btn-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Reported User</th>
+                <th>Reason</th>
+                <th>Context Snapshot</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="reports-table-body">
+              <tr><td colspan="5">Loading reports...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+            </html>
